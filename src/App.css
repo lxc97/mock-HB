@@ -1,0 +1,9 @@
+h1dđ {
+  justify-content: space-between;
+  transform: translateY(-50%);
+  overflow-x: scroll;
+  cursor: pointer;
+}
+.selected {
+  color: red !important;
+}
