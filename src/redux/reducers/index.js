@@ -5,7 +5,8 @@ import commentReducer from "./commentReducer";
 import listRequestReducer from "./listRequestReducer";
 import requestDetailReducer from "./requestDetailReducer";
 import userReducer from "./userReducer";
-import assigneeReducer from "./assigneeReducer"
+import assigneeReducer from "./assigneeReducer";
+import historyReducer from "./history";
 
 const rootReducer = combineReducers({
   listRequest: listRequestReducer,
@@ -15,5 +16,6 @@ const rootReducer = combineReducers({
   userReducer: userReducer,
   categoryReducer: categoryReducer,
   assigneeReducer: assigneeReducer,
+  historyReducer: historyReducer,
 });
 export default rootReducer;

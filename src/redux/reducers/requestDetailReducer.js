@@ -32,7 +32,7 @@ const requestDetailReducer = (state = initialState, action) => {
         ...state,
         data: {
           ...state.data,
-          comments: [...state.data.comments, action.payload],
+          comments: [action.payload,...state.data.comments],
         },
       };
     default:

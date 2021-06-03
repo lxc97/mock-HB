@@ -49,3 +49,21 @@ export const filterRequestSuccess = (data) => ({
   payload: data,
   loading: false,
 });
+
+//delete request action
+export const deleteRequest = (data) => ({
+  loading: true,
+  type: types.DELETE_REQUEST,
+  payload: data,
+});
+
+export const deleteRequestSuccess = (data) => ({
+  type: types.DELETE_REQUEST_SUCCESS,
+  payload: data,
+  loading: false,
+});
+export const deleteRequestFail = (error) => ({
+  type: types.DELETE_REQUEST_FAIL,
+  payload: error,
+  loading: false,
+});

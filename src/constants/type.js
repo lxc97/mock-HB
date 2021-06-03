@@ -3,6 +3,7 @@ export const CODE_SUCCESS = 200;
 export const API_DOES_NOT_EXIT = "API does not exist";
 
 export const STATUS = ["", "open", "inprogress", "close"];
+export const STATUS_CATEGORY = ["", "Enable", "Disable"];
 export const STATUS_CLOSE = 2;
 
 export const LIST_REQUEST = "LIST_REQUEST";
@@ -64,3 +65,15 @@ export const DELETE_CATEGORY_FAIL = "DELETE_CATEGORY_FAIL";
 export const GET_ASSIGNEE = "GET_ASSIGNEE";
 export const GET_ASSIGNEE_SUCCESS = "GET_ASSIGNEE_SUCCESS";
 export const GET_ASSIGNEE_FAIL = "GET_ASSIGNEE_FAIL";
+
+export const HISTORY = "HISTORY";
+export const GET_HISTORY_SUCCESS = "GET_HISTORY_SUCCESS";
+export const GET_HISTORY_FAIL = "GET_HISTORY_FAIL";
+
+export const DELETE_REQUEST = "DELETE_REQUEST";
+export const DELETE_REQUEST_SUCCESS = "DELETE_REQUEST_SUCCESS";
+export const DELETE_REQUEST_FAIL = "DELETE_REQUEST_FAIL";
+
+export const UPDATE_REQUEST = "UPDATE_REQUEST";
+export const UPDATE_REQUEST_SUCCESS = "UPDATE_REQUEST_SUCCESS";
+export const UPDATE_REQUEST_FAIL = "UPDATE_REQUEST_FAIL";

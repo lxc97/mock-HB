@@ -76,6 +76,21 @@ const listRequestReducer = (state = initialState, action) => {
         data: action.payload,
         loading: false,
       };
+
+    //delete request
+    case types.DELETE_REQUEST:
+      console.log("delete request: ", action);
+      return {
+        ...state,
+      };
+    case types.DELETE_REQUEST_SUCCESS:
+      console.log("delete_request_success: ", action);
+      console.log({ state });
+      const indexDelete = state.data.findIndex((x) => x.id === action.payload);
+      console.log("newStateDelete", indexDelete);
+      const newStateDelete = { ...state };
+      newStateDelete?.data?.data.splice(indexDelete, 1);
+      return newStateDelete;
     default:
       return state;
   }

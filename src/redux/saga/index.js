@@ -14,6 +14,9 @@ import watchRequestDetail from "./requestDetail";
 import watchLogout from "./logout";
 import watchUser from "./user";
 import watchAssignee from "./assignee";
+import watchHistory from "./history";
+import { watchDeleteRequest } from "./deleteRequest";
+import watchUpdateRequest from "./updateRequest";
 
 export default function* rootSaga() {
   yield all([
@@ -30,5 +33,8 @@ export default function* rootSaga() {
     call(watchCategory),
     call(watchAssignee),
     call(watchLogout),
+    call(watchHistory),
+    call(watchDeleteRequest),
+    call(watchUpdateRequest),
   ]);
 }

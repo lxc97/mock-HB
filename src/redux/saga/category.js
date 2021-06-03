@@ -40,7 +40,12 @@ function* updateCategory(data) {
   try {
     const updateCategory = yield call(categoryApi.put, data);
     if (updateCategory) {
-      yield put(actions.updateCategorySuccess(updateCategory));
+      // yield put(actions.updateCategorySuccess(updateCategory));
+      const dataCategory = yield call(categoryApi.get);
+      if (dataCategory) {
+        yield put(actions.categorySuccess(dataCategory));
+      }
+
     }
   } catch (error) {
     yield put(actions.updateCategoryFail(error.message));

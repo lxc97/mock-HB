@@ -29,17 +29,28 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
   },
   btnAdd: {
-    padding: "0 30px"
-  }
+    padding: "0 30px",
+  },
 }));
 
 function Header(props) {
-  const { title } = props;
+  const { title, onSearch } = props;
   const [openEdit, setOpenEdit] = useState(false);
+  const [query, setQuery] = useState("");
   const classes = useStyles();
 
   const handleOpenEdit = () => {
     setOpenEdit(true);
+  };
+
+  const handleOnChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log({query});
+    onSearch(query)
   };
   return (
     <div className={classes.header}>
@@ -47,7 +58,12 @@ function Header(props) {
         <h1>{title}</h1>
       </div>
       <div className={classes.action}>
-        <form noValidate autoComplete="off" className={classes.search}>
+        <form
+          noValidate
+          autoComplete="off"
+          className={classes.search}
+          onSubmit={(e) => handleSearch(e)}
+        >
           <TextField
             id="outlined-basic"
             variant="outlined"
@@ -56,11 +72,13 @@ function Header(props) {
             InputProps={{
               className: classes.input,
             }}
+            onChange={(e)=>handleOnChange(e)}
           />
           <Button
             variant="contained"
             color="primary"
             className={classes.button}
+            type="submit"
           >
             SEARCH
           </Button>

@@ -7,7 +7,6 @@ import TextField from "@material-ui/core/TextField";
 import Select from "../../components/Select";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequest } from "../../redux/actions/listRequest";
-import DatePicker from "../../components/DatePicker";
 import LayoutDefault from "../../layout/LayoutDefault";
 import { category } from "../../redux/actions/category";
 import { assignee } from "../../redux/actions/assignee";
@@ -64,8 +63,14 @@ const initialFValues = {
   manager_id: "",
   status: 1,
   category_id: "",
+  priority: "",
   dueDate: new Date(),
 };
+const priorityList = [
+  { id: 1, name: "Low" },
+  { id: 2, name: "Medium" },
+  { id: 2, name: "High" },
+];
 
 function CreateRequest(props) {
   const dispatch = useDispatch();
@@ -117,6 +122,8 @@ function CreateRequest(props) {
       temp.category_id = fieldValues.category_id
         ? ""
         : "This field is required.";
+    if ("priority" in fieldValues)
+      temp.priority = fieldValues.priority ? "" : "This field is required.";
     setErrors({
       ...temp,
     });
@@ -208,6 +215,16 @@ function CreateRequest(props) {
                   onChange={handleInputChange}
                   options={dataCategory}
                   error={errors.category_id}
+                />
+              </div>
+              <div className={classes.textField}>
+                <h3>Priority</h3>
+                <Select
+                  name="priority"
+                  value={values.priority}
+                  onChange={handleInputChange}
+                  options={priorityList}
+                  error={errors.priority}
                 />
               </div>
             </div>

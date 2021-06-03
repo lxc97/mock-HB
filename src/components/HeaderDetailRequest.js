@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
-import { STATUS, STATUS_CLOSE } from "../constants/type";
+import { STATUS } from "../constants/type";
+import AlertDialogRequest from '../pages/DetailRequest/AlertDialogRequest'
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -20,9 +21,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HeaderDetailRequest(props) {
-  const { status_admin, content, loading } = props;
-  console.log({status_admin})
+  const { status_admin, content, loading, dataFix } = props;
+  console.log({dataFix})
+  const [open, setOpen] = useState(false);
+
   const classes = useStyles();
+
+  const handleChangePage = (data) => {
+    setOpen(true);
+  };
   return (
     <div className={classes.header}>
       <div className={classes.title}>
@@ -38,12 +45,13 @@ function HeaderDetailRequest(props) {
           <Button
             variant="contained"
             color="default"
-            disabled={status_admin == STATUS_CLOSE ? true : false}
+            onClick={() => handleChangePage(dataFix)}
           >
             Edit
           </Button>
         </div>
       </div>
+      <AlertDialogRequest dataFix={dataFix} open={open} setOpen={setOpen}/>
     </div>
   );
 }

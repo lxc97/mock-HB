@@ -15,7 +15,7 @@ import { assignee } from "../redux/actions/assignee";
 const useStyles = makeStyles((theme) => ({
   dialogPaper: {
     height: "460px",
-    width: "800px",
+    width: "400px",
   },
   header: {
     borderBottom: "1px solid #777",
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AlertDialog(props) {
   const classes = useStyles();
   const { open, setOpen, dataEdit } = props;
+  console.log({ dataEdit });
   const dispatch = useDispatch();
 
   const assignees = useSelector((state) => state.assigneeReducer).data;
@@ -40,8 +41,8 @@ export default function AlertDialog(props) {
   };
   const initialValue = {
     name: dataEdit ? dataEdit.name : "",
-    user_id: dataEdit ? 10 : null,
-    status: dataEdit ? 1 : null,
+    user_id: dataEdit ? dataEdit.assignee_id : null,
+    status: dataEdit ? dataEdit.status : null,
   };
 
   const validationSchema = Yup.object().shape({
@@ -62,7 +63,7 @@ export default function AlertDialog(props) {
         ...values,
         id: dataEdit.id,
       };
-      dispatch(updateCategory(data))
+      dispatch(updateCategory(data));
     }
     handleClose();
   };
@@ -98,28 +99,39 @@ export default function AlertDialog(props) {
           {(formikProps) => {
             return (
               <Form className={classes.form}>
-                <h3>Name</h3>
-                <FastField
-                  name="name"
-                  component={InputField}
-                  variant="outlined"
-                  margin="normal"
-                  id="name"
-                />
-                <h3>Assignee</h3>
-                <FastField
-                  name="user_id"
-                  component={SelectField}
-                  id="user_id"
-                  options={assignees}
-                />
-                <h3>Status</h3>
-                <FastField
-                  name="status"
-                  component={SelectField}
-                  id="status"
-                  options={status}
-                />
+                <div className={classes.item}>
+                  <h3>Name</h3>
+                  <FastField
+                    name="name"
+                    component={InputField}
+                    variant="outlined"
+                    margin="normal"
+                    id="name"
+                    className="input"
+                  />
+                </div>
+
+                <div className={classes.item}>
+                  <h3>Assignee</h3>
+                  <FastField
+                    name="user_id"
+                    component={SelectField}
+                    id="user_id"
+                    options={assignees}
+                    className="input"
+                  />
+                </div>
+
+                <div className={classes.item}>
+                  <h3>Status</h3>
+                  <FastField
+                    name="status"
+                    component={SelectField}
+                    id="status"
+                    options={status}
+                    className="input"
+                  />
+                </div>
                 <DialogActions className={classes.action}>
                   <Button
                     onClick={handleClose}

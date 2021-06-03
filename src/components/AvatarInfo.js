@@ -2,6 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import imageAvatar from "../assets/image/user.png";
+import imageAvatar2 from "../assets/image/penguin.png";
+import imageAvatar3 from "../assets/image/sloth.png";
 import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +33,7 @@ function AvatarInfo(props) {
       {loading ? (
         <Skeleton animation="wave" variant="circle" width={40} height={40} />
       ) : (
-        <Avatar alt="Remy Sharp" src={imageAvatar} />
+        <Avatar alt="Remy Sharp" src={imageAvatar3} />
       )}
       <div className={classes.info}>
         {loading ? (

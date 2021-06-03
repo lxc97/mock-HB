@@ -7,11 +7,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Pagination from "@material-ui/lab/Pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { requestList } from "../redux/actions/listRequest";
+import { deleteRequest, requestList } from "../redux/actions/listRequest";
 import { Link, useHistory } from "react-router-dom";
 import { Box } from "@material-ui/core";
 import BackdropCustom from "./BackdropCustom";
 import { STATUS } from "../constants/type";
+import DeleteIcon from "@material-ui/icons/Delete";
+import LaunchIcon from "@material-ui/icons/Launch";
 
 const useStyles = makeStyles((theme) => ({
   colorTable: {
@@ -23,13 +25,32 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   tableRow: {
+    "& .status": {
+      "& .action": {
+        display: "flex",
+        justifyContent: "space-between",
+        visibility: "hidden",
+      },
+    },
+
+    "&:hover": {
+      background: "#f5f5f5",
+      "& .status .action": {
+        visibility: "visible",
+      },
+    },
+  },
+
+  btnAction: {
+    marginRight: "10px",
+    fontSize: "18px",
     cursor: "pointer",
   },
 }));
 
 export default function ListRequest(props) {
   const { dataTitles } = props;
-  const {filter} = props
+  const { filter } = props;
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -40,8 +61,8 @@ export default function ListRequest(props) {
   const rows = requests.data ? requests.data : "";
   const [page, setParams] = useState(1);
   const filters = {
-    params: {...filter, page}
-  }
+    params: { ...filter, page },
+  };
   useEffect(() => {
     dispatch(requestList(filters));
   }, [page]);
@@ -49,6 +70,11 @@ export default function ListRequest(props) {
   const handleChangePage = (id) => {
     history.push({ pathname: `/request/show/${id}`, state: { id: id } });
   };
+
+  const handleDelete = (id) => {
+    dispatch(deleteRequest(id));
+  };
+
   return (
     <>
       <Table size="small">
@@ -79,16 +105,29 @@ export default function ListRequest(props) {
                 return (
                   <TableRow
                     key={id}
-                    onClick={() => handleChangePage(id)}
+                    // onClick={() => handleChangePage(id)}
                     className={classes.tableRow}
                   >
-                    <TableCell>{name}</TableCell>
+                    <TableCell className="tableCell">{name}</TableCell>
                     <TableCell>{content}</TableCell>
                     <TableCell>{author}</TableCell>
                     <TableCell>{due_date}</TableCell>
                     <TableCell>{categoryName}</TableCell>
                     <TableCell>{assignee}</TableCell>
                     <TableCell>{STATUS[status]}</TableCell>
+                    <TableCell className="status">
+                      <div className="action">
+                        <LaunchIcon
+                          onClick={() => handleChangePage(id)}
+                          className={classes.btnAction}
+                        />
+                        <DeleteIcon
+                          className={classes.btnAction}
+                          color="error"
+                          onClick={() => handleDelete(id)}
+                        />
+                      </div>
+                    </TableCell>
                   </TableRow>
                 );
               })

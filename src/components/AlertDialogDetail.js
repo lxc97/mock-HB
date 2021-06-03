@@ -6,10 +6,11 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import { makeStyles } from "@material-ui/core";
 import AlertDialog from "./AlertDialog";
+import { STATUS_CATEGORY } from "../constants/type";
 
 const useStyles = makeStyles((theme) => ({
   dialogPaper: {
-    height: "300px",
+    height: "350px",
     width: "400px",
   },
   header: {
@@ -19,24 +20,33 @@ const useStyles = makeStyles((theme) => ({
       margin: "0",
     },
   },
+  action: {
+    margin: "0 auto",
+  },
+  item: {
+    display: "flex",
+    alignItems: "center",
+    backgroundColor: "#fafafa",
+    padding: "0 10px",
+    border: "2px solid #fff",
+    "& .title": {
+      width: "30%"
+    }
+  }
 }));
 export default function AlertDialogDetail(props) {
   const classes = useStyles();
-  const [openEdit, setOpenEdit] = useState(false);
-  const { open, setOpen } = props;
+  const { openDetail, setOpenDetail, dataEdit } = props;
+  console.log({ dataEdit });
 
   const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpenEdit = () => {
-    setOpenEdit(true);
+    setOpenDetail(false);
   };
 
   return (
     <div>
       <Dialog
-        open={open}
+        open={openDetail}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -45,28 +55,46 @@ export default function AlertDialogDetail(props) {
         <div className={classes.header}>
           <h3>HBLAB</h3>
         </div>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleOpenEdit} color="primary" autoFocus>
-            Edit
-          </Button>
-        </DialogActions>
+
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <p>
-              Name: <span>XXXXXX</span>
-            </p>
-            <p>
-              Assignee: <span>XXXXXXX</span>
-            </p>
-            <p>
-              Status: <span>Disable</span>
-            </p>
+
+            {/* <table className={classes.table}>
+                <tr>
+                  <th>Name:</th>
+                  <td>{dataEdit?.name}</td>
+                </tr>
+                <tr>
+                  <th>Assignee:</th>
+                  <td>{dataEdit?.assignee}</td>
+                </tr>
+                <tr>
+                  <th>Status:</th>
+                  <td>{STATUS_CATEGORY[dataEdit?.status]}</td>
+                </tr>
+            </table> */}
+
+            <div className={classes.item}>
+              <h4 className="title">Name:</h4>
+              <p>{dataEdit?.name}</p>
+            </div>
+            <div className={classes.item}>
+              <h4 className="title">Assignee:</h4>
+              <p>{dataEdit?.assignee}</p>
+            </div>
+            <div className={classes.item}>
+              <h4 className="title">Status:</h4>
+              <p>{STATUS_CATEGORY[dataEdit?.status]}</p>
+            </div>
+
           </DialogContentText>
         </DialogContent>
-        <AlertDialog open={openEdit} setOpen={setOpenEdit} />
+
+        <DialogActions className={classes.action}>
+          <Button onClick={handleClose} color="primary" variant="contained">
+            Cancel
+          </Button>
+        </DialogActions>
       </Dialog>
     </div>
   );

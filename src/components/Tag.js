@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Tag(props) {
   const { icon, name, disabled, isAvatar } = props;
-  const nameArray = name.split(" ");
-  const index = nameArray.length - 1;
-  const keyWord = nameArray[index].slice(0, 1);
+  // const nameArray = name?.split(" ");
+  // const index = nameArray?.length - 1;
+  // const keyWord = nameArray[index].slice(0, 1);
   const classes = useStyles();
 
   const handleDelete = () => {
@@ -36,7 +36,7 @@ export default function Tag(props) {
       {isAvatar ? (
         <Chip
           size="small"
-          avatar={<Avatar>{keyWord}</Avatar>}
+          // avatar={<Avatar>{keyWord}</Avatar>}
           label={name}
           color="primary"
           // onDelete={handleDelete}

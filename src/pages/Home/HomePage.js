@@ -32,6 +32,7 @@ function HomePage(props) {
     "Category",
     "Assignee",
     "Status",
+    ""
   ];
   const classes = useStyles();
   return (
